@@ -25,9 +25,9 @@ const makeDraw = async (req, res) => {
     await newDraw.save();
     // added new attribute returned to controller responese
     return res.status(201).json({
-      name: newDomo.name,
-      age: newDomo.age,
-      favoritePower: newDomo.favorite_power,
+      // name: newDomo.name,
+      // age: newDomo.age,
+      // favoritePower: newDomo.favorite_power,
     });
   } catch (err) {
     console.log(err);

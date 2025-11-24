@@ -2,20 +2,20 @@ const controllers = require('./controllers');
 const mid = require('./middleware');
 
 const router = (app) => {
-  //router for draw model
+  // router for draw model
   app.get('/getDraws', mid.requiresLogin, controllers.Draw.getDraws);
 
-  //router for login
+  // router for login
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
 
-  //router for signup
+  // router for signup
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
 
-  //router for logout
+  // router for logout
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
 
-  //router for maker
+  // router for maker
   app.get('/maker', mid.requiresLogin, controllers.Draw.makerPage);
   app.post('/maker', mid.requiresLogin, controllers.Draw.makeDraw);
 
