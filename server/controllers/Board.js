@@ -4,7 +4,6 @@ const { Board } = models;
 
 const makerPage = (req, res) => res.render('app');
 
-// added in about feature page
 const aboutPage = (req, res) => res.render('about');
 
 const createBoard = async (req, res) => {
@@ -15,7 +14,6 @@ const createBoard = async (req, res) => {
   const boardData = {
     title: req.body.title,
     description: req.body.description,
-    // added new attribute to model data
     category: req.body.category,
     owner: req.session.account._id,
   };
@@ -23,7 +21,6 @@ const createBoard = async (req, res) => {
   try {
     const newBoard = new Board(boardData);
     await newBoard.save();
-    // added new attribute returned to controller responese
     return res.status(201).json({
       title: newBoard.title,
       description: newBoard.description,
@@ -41,7 +38,6 @@ const createBoard = async (req, res) => {
 const getBoards = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
-    // added new attribute selected for retrieval
     const docs = await Board.find(query)
       .select('title description category createdDate').lean().exec();
 
