@@ -64,7 +64,7 @@ const BoardList = (props) => {
 
     const boardNodes = boards.map(board => {
         return (
-            <div key={board.id} className="boardSummary">
+            <div key={board.id} className="boardSummaryCard">
                 <div className="boardIcon"></div>
                 <h3 className="boardTitle">Title: {board.title}</h3>
 
@@ -85,7 +85,7 @@ const BoardList = (props) => {
 const App = () => {
     const [reloadBoards, setReloadBoards] = useState(false);
 
-    const triggerReload = () => settleReloadBoards(prev => !prev);
+    const triggerReload = () => setReloadBoards(prev => !prev);
 
     return (
         <div>
