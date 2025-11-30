@@ -1,2 +1,2 @@
 module.exports.Account = require('./Account.js');
-module.exports.Draw = require('./Board.js');
+module.exports.Board = require('./Board.js');
