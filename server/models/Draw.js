@@ -1,41 +1,67 @@
 const mongoose = require('mongoose');
-const _ = require('underscore');
 
-const setName = (name) => _.escape(name).trim();
+const { Schema, Types } = mongoose;
 
-const DrawSchema = new mongoose.Schema({
-  name: {
+const DrawSchema = new Schema({
+  type: {
+    type: String,
+    required: true,
+    enum: ['line', 'rectangle', 'text'],
+  },
+  data: {
+    type: String,
+    required: true,
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+}, { _id: false });
+
+const DrawboardSchema = new Schema({
+  title: {
     type: String,
     required: true,
     trim: true,
-    set: setName,
   },
-  age: {
-    type: Number,
-    min: 0,
+  content: {
+    type: [DrawSchema],
     required: true,
+    default: [],
   },
-  // added new attribute
-  favorite_power: {
+  visibility: {
     type: String,
     required: true,
-    trim: true,
+    enum: ['private', 'public-view', 'public-edit'],
+    default: 'private',
   },
   owner: {
-    type: mongoose.Schema.ObjectId,
+    type: Types.ObjectId,
     required: true,
     ref: 'Account',
   },
-  createdDate: {
+  collaborators: {
+    type: [Types.ObjectId],
+    default: [],
+    ref: 'Account',
+  },
+  createdAt: {
     type: Date,
     default: Date.now,
   },
 });
 
-DrawSchema.statics.toAPI = (doc) => ({
-  name: doc.name,
-  age: doc.age,
-});
+DrawboardSchema.methods.toAPI = function toAPI() {
+  return {
+    title: this.title,
+    id: this._id,
+    visibility: this.visibility,
+  };
+};
 
-const DrawModel = mongoose.model('Draw', DrawSchema);
-module.exports = DrawModel;
+const DrawModel = mongoose.model('Draw', DrawboardSchema);
+
+module.exports = {
+  DrawModel,
+  DrawSchema,
+};

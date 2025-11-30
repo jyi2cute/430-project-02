@@ -4,13 +4,25 @@
 */
 const handleError = (message) => {
   document.getElementById('errorMessage').textContent = message;
-  document.getElementById('domoMessage').classList.remove('hidden');
+  document.getElementById('appMessage').classList.remove('hidden');
+  document.getElementById('successMessage').classList.add('hidden');
 };
 
+const handleSuccess = (message) => {
+  document.getElementById('sucessMessage').textContent = message;
+  document.getElementById('successMessage').classList.remove('hidden');
+  document.getElementById('appMessage').classList.add('hidden');
+  setTimeout(() => {
+    document.getElementById('successMessage').classList.add('hidden');
+  }, 3000);
+}
 /* Sends post requests to the server using fetch. Will look for various
    entries in the response JSON object, and will handle them appropriately.
 */
 const sendPost = async (url, data, handler) => {
+  hideError();
+  document.getElementById('successMessage').classList.add('hidden');
+
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -20,7 +32,12 @@ const sendPost = async (url, data, handler) => {
   });
 
   const result = await response.json();
-  document.getElementById('domoMessage').classList.add('hidden');
+  const drawMessageElement = document.getElementById('drawMessage');
+
+
+  if (drawMessageElement) {
+    drawMessageElement.classList.add('hidden');
+  }
 
   if(result.redirect) {
     window.location = result.redirect;
@@ -30,17 +47,18 @@ const sendPost = async (url, data, handler) => {
     handleError(result.error);
   }
 
-  if(handler) {
+  if(handler && !result.error && !result.redirect) {
     handler(result);
   }
 };
 
 const hideError = () => {
-    document.getElementById('domoMessage').classList.add('hidden');
+    document.getElementById('appMessage').classList.add('hidden');
 };
 
 module.exports = {
     handleError,
+    handleSuccess,
     sendPost,
     hideError,
 };
