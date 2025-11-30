@@ -2,6 +2,7 @@ const helper = require('./helper.js');
 const React = require('react');
 const {createRoot} = require('react-dom/client');
 
+
 const handleLogin = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -44,35 +45,39 @@ const handleSignup = (e) => {
 const LoginWindow = (props) => {
     return (
         <form id='loginForm'
-             name="loginForm"
-             onSubmit={handleLogin}
-             action="/login"
-             method="POST"
-             className="mainForm"
+              name='loginForm'
+              onSubmit={handleLogin}
+              action="/login"
+              method="POST"
+              className="mainForm loginForm"
         >
-            <label htmlFor="username">Username: </label>
-            <input id="user" type="text" name="username" placeholder="username" />
-            <label htmlFor="pass">Password: </label>
-            <input id="pass" type="password" name="pass" placeholder="password" />
-            <input className="formSubmit" type="submit" value="Sign in" />
+            <h2>Sign In To MoodBoard</h2>
+            <label htmlFor="username">Username:</label>
+            <input id="user" type="text" name="username" placeholder="your_username" />
+
+            <label htmlFor="pass">Password:</label>
+            <input id="pass" type="password" name="pass" placeholder="your_password" />
+
+            <input className="formSubmit" type="submit" value="Login" />
         </form>
     );
 };
 
 const SignupWindow = (props) => {
     return (
-        <form id="signupForm" 
-            name="signupForm"
-            onSubmit={handleSignup}
-            action="/signup"
-            method="POST"
-            className="mainForm"
+        <form id="signupForm"
+              name='signupForm'
+              onSubmit={handleSignup}
+              action="/signup"
+              method="POST"
+              className="mainForm signupForm"
         >
+            <h2>Create Your Mood Board Account</h2>
             <label htmlFor="username">Username: </label>
-            <input id="user" type="text" name="username" placeholder="username" />
+            <input id="user" type="text" name="username" placeholder="your_username" />
             <label htmlFor="pass">Password: </label>
-            <input id="pass" type="password" name="pass" placeholder="password" />
-            <label htmlFor="pass">Password: </label>
+            <input id="pass" type="password" name="pass" placeholder="your_password" />
+            <label htmlFor="pass"> Confirm Password: </label>
             <input id="pass2" type="password" name="pass2" placeholder="retype password" />
             <input className="formSubmit" type="submit" value="Sign up" />
         </form>
