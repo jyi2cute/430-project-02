@@ -31,7 +31,7 @@ const createBoard = async (req, res) => {
     if (err.code === 11000) {
       return res.status(400).json({ error: 'Mood board already exists!' });
     }
-    return res.status(500).json({ error: 'An error occured making domo!' });
+    return res.status(500).json({ error: 'An error occured making mood board!' });
   }
 };
 
