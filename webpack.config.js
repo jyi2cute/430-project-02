@@ -23,6 +23,6 @@ module.exports = {
     output: {
         //Where to put the bundle
         path: path.resolve(__dirname, 'hosted'),
-        filename: '[name]bundle.js', //The name of the bundle file
+        filename: '[name]Bundle.js', //The name of the bundle file
     }
 }
