@@ -11,13 +11,6 @@ const createBoard = async (req, res) => {
     return res.status(400).json({ error: 'Title, description, and category are required!' });
   }
 
-  if (!req.session || !req.session.account || !req.session.account._id) {
-    // Log the actual state of the session for server debugging
-    console.log("CRITICAL ERROR: Session or Account ID is missing during createBoard POST."); 
-    console.log("Session:", req.session);
-    
-    return res.status(401).json({ error: 'User session is invalid or expired. Please log in again.' });
-  }
   const boardData = {
     title: req.body.title,
     description: req.body.description,
