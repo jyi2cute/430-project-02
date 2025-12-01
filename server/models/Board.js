@@ -3,7 +3,7 @@ const _ = require('underscore');
 
 const setTitle = (title) => _.escape(title).trim();
 const setDescription = (description) => _.escape(description).trim();
-const setCategory = (category) => _.escapte(category).trim();
+const setCategory = (category) => _.escape(category).trim();
 
 const BoardSchema = new mongoose.Schema({
   title: {
