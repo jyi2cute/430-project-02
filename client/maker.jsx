@@ -3,6 +3,7 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
+//function to handle the creation of the mood board
 const handleBoardCreation = (e, onBoardAdded) => {
     e.preventDefault();
     helper.hideError();
@@ -20,6 +21,7 @@ const handleBoardCreation = (e, onBoardAdded) => {
     return false;
 }
 
+//function for mood board creation form
 const BoardCreationForm = (props) => {
     return( 
         <form id="boardForm"
@@ -34,7 +36,6 @@ const BoardCreationForm = (props) => {
             <input id="boardTitle" type="text" name="name" placeholder="Board Title" />
             <label htmlFor="description">Description: </label>
             <input id="boardDescription" type="text" name="description" placeholder="A brief summary of the board's theme" />
-            {/*added in the form input for the new attribute*/}
             <label htmlFor="category">Category: </label>
             <input id="boardCategory" type="text" name="category" placeholder="Nature" />
             <input className="makeBoardSubmit" type="submit" value="Create Mood Board" />
@@ -42,6 +43,7 @@ const BoardCreationForm = (props) => {
     );
 };
 
+//function for the moodboard list
 const BoardList = (props) => {
     const [boards, setBoards] = useState(props.boards);
     

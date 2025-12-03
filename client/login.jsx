@@ -3,6 +3,7 @@ const React = require('react');
 const {createRoot} = require('react-dom/client');
 
 
+//function to handle login
 const handleLogin = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -19,6 +20,7 @@ const handleLogin = (e) => {
     return false;
 }
 
+//function to handle signup
 const handleSignup = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -42,6 +44,7 @@ const handleSignup = (e) => {
     return false;
 }
 
+//function for login window
 const LoginWindow = (props) => {
     return (
         <form id='loginForm'
@@ -63,6 +66,7 @@ const LoginWindow = (props) => {
     );
 };
 
+//function for signup winodw
 const SignupWindow = (props) => {
     return (
         <form id="signupForm"
