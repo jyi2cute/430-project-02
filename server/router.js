@@ -15,8 +15,6 @@ const router = (app) => {
 
   app.post('/createBoard', mid.requiresLogin, controllers.Board.createBoard);
 
-  app.get('/about', mid.requiresSecure, controllers.Board.aboutPage);
-
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };
 
