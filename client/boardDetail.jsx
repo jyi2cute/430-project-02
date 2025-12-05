@@ -3,6 +3,7 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
+//image card function
 const ImageCard = ({ image, onDelete }) => {
     return (
         <div className="imageCard">
@@ -13,6 +14,7 @@ const ImageCard = ({ image, onDelete }) => {
     );
 };
 
+//drag and drop upload function
 const DragAndDropUpload = ({ boardId, onUploadComplete}) => {
     const handleFileUpload = (e) => {
         e.preventDefault();
@@ -29,11 +31,13 @@ const DragAndDropUpload = ({ boardId, onUploadComplete}) => {
     );
 };
 
+//function for board detail view
 const BoardDetailView = ({ boardId }) => {
     const [board, setBoard] = useState(null);
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    //function to load the board data
     const loadBoardData = async () => {
         setLoading(true);
 
@@ -51,6 +55,7 @@ const BoardDetailView = ({ boardId }) => {
         loadBoardData();
     }, [boardId]);
 
+    //function to handle image deletion
     const handleImageDelete = async (imageId) => {
         await helper.sendPost('/deleteImage', { boardId, imageId }, loadBoardData);
     };

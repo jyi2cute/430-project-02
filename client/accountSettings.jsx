@@ -2,6 +2,7 @@ const React = require('react');
 const { PasswordChangeWindow } = require(' ./passwordChange.jsx');
 const { createRoot } = require('react-dom/client');
 
+//form function for the user profile
 const UserProfileForm = (props) => {
     return (
         <section className="userProfileSettings">
@@ -12,6 +13,7 @@ const UserProfileForm = (props) => {
     );
 };
 
+//function for the account settings of the user
 const AccountSettings = (props) => {
     return (
         <div id="accountSettings">

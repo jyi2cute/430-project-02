@@ -54,3 +54,5 @@ const init = () => {
 };
 
 module.exports.PasswordChangeWindow = PasswordChangeWindow;
+
+window.onload = init;
