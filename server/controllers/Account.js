@@ -9,6 +9,7 @@ const logout = (req, res) => {
   res.redirect('/');
 };
 
+// function for the user to login
 const login = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -28,6 +29,7 @@ const login = (req, res) => {
   });
 };
 
+// function for the user to sign up
 const signup = async (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;

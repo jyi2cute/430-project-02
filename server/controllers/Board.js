@@ -6,6 +6,7 @@ const makerPage = (req, res) => res.render('app');
 
 const aboutPage = (req, res) => res.render('about');
 
+// function to create the mood board
 const createBoard = async (req, res) => {
   if (!req.body.title || !req.body.description || !req.body.category) {
     return res.status(400).json({ error: 'Title, description, and category are required!' });
@@ -35,6 +36,7 @@ const createBoard = async (req, res) => {
   }
 };
 
+// function to retrieve the mood board
 const getBoards = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
