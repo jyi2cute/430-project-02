@@ -2,6 +2,7 @@ const helper = require('./helper.js');
 const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
+const { AdComponent } = require('./advertisement.jsx');
 
 //function to handle the creation of the mood board
 const handleBoardCreation = (e, onBoardAdded) => {
@@ -93,6 +94,8 @@ const App = () => {
         <div>
             <div id="moodBoardApp">
                 <BoardCreationForm triggerReload={triggerReload} />
+
+                <AdComponent />
             </div>
             <div id="userBoards">
                 <h3>Your Collections</h3>

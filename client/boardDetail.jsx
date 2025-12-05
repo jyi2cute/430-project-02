@@ -78,3 +78,5 @@ const init = () => {
     const root = createRoot(document.getElementById('app'));
     root.render(<BoardDetailView boardId={boardId} />);
 }
+
+window.onload = init;
