@@ -2,7 +2,7 @@ const React = require('react');
 
 const AdComponent = () => {
     const handleAdClick = () => {
-        window.onload.href= '/premium';
+        window.location.href= '/premium';
     };
 
     return (
@@ -12,7 +12,7 @@ const AdComponent = () => {
 
             <button 
                 className="adUpgradeButton"
-                onCLick={handleAdClick}
+                onClick={handleAdClick}
             >
                 See PRO Benefits and Upgrade Now!
             </button>
