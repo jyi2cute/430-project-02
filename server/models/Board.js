@@ -5,6 +5,22 @@ const setTitle = (title) => _.escape(title).trim();
 const setDescription = (description) => _.escape(description).trim();
 const setCategory = (category) => _.escape(category).trim();
 
+const ImageSchema = new mongoose.Schema({
+  url: {
+    type: String,
+    required: true,
+  },
+  caption: {
+    type: String,
+    trim: true,
+    default: 'Untitled Image',
+  },
+  uploadedData: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
 const BoardSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -24,6 +40,11 @@ const BoardSchema = new mongoose.Schema({
     trim: true,
     set: setCategory,
   },
+  images: {
+    type: [ImageSchema],
+    required: false,
+    default: [],
+  },
   owner: {
     type: mongoose.Schema.ObjectId,
     required: true,
@@ -40,6 +61,8 @@ BoardSchema.statics.toAPI = (doc) => ({
   description: doc.description,
   category: doc.category,
   _id: doc._id,
+  images: doc.images || [],
+  imageCount: doc.images ? doc.images.length : 0,
 });
 
 const BoardModel = mongoose.model('Board', BoardSchema);

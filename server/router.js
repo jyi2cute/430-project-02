@@ -16,6 +16,20 @@ const router = (app) => {
   app.post('/createBoard', mid.requiresLogin, controllers.Board.createBoard);
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+
+  app.get('/settings', mid.requiresLogin, controllers.Account.settingsPage);
+  app.post('/changePassword', mid.requiresSecure, mid.requiresLogin, controllers.Account.changePassword);
+
+  app.get('/board/:_id', mid.requiresLogin, controllers.Board.boardDetailPage);
+  app.get('/getBoardData', mid.requiresLogin, controllers.Board.getBoardData);
+
+  app.post('/uploadImage', mid.requiresLogin, controllers.Board.uploadImage);
+  app.post('/deleteImage', mid.requiresLogin, controllers.Board.deleteImage);
+
+  app.get('/premium', mid.requiresLogin, controllers.Account.premiumPage);
+  app.post('/premiumUpgrade', mid.requiresLogin, controllers.Account.premiumUpgrade);
+
+  app.use(controllers.Account.notFound);
 };
 
 module.exports = router;

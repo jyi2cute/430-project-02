@@ -4,8 +4,6 @@ const { Board } = models;
 
 const makerPage = (req, res) => res.render('app');
 
-const aboutPage = (req, res) => res.render('about');
-
 // function to create the mood board
 const createBoard = async (req, res) => {
   if (!req.body.title || !req.body.description || !req.body.category) {
@@ -50,9 +48,97 @@ const getBoards = async (req, res) => {
   }
 };
 
+const boardDetailPage = (req, res) => {
+  const boardId = req.params._id;
+
+  return res.render('boardDetail', { boardId });
+};
+
+const getBoardData = async (req, res) => {
+  const boardId = req.query._id;
+
+  try {
+    const doc = await Board.findOne({ _id: boardId, owner: req.session.account._id }).lean().exec();
+
+    if (!doc) {
+      return res.status(404).json({ error: 'Board not found or unauthorized.' });
+    }
+
+    return res.json({ board: doc });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Error retrieving board data!' });
+  }
+};
+
+const uploadImage = async (req, res) => {
+  const { boardId, imageUrl, caption } = req.body;
+
+  if (!boardId || !imageUrl || !caption) {
+    return res.status(400).json({ error: 'Board ID, image URL, and caption are required.' });
+  }
+
+  try {
+    const updatedBoard = await Board.findOneAndUpdate(
+      { _id: boardId, owner: req.session.account._id },
+      {
+        $push: {
+          images: {
+            url: imageUrl,
+            caption,
+            _id: new models.mongoose.Types.ObjectId(),
+          },
+        },
+      },
+      { new: true },
+    );
+
+    if (!updatedBoard) {
+      return res.status(404).json({ error: 'Board not found or unauthorized.' });
+    }
+
+    return res.json({ message: 'Image added successfully!', board: updatedBoard });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Error uploading image to board!' });
+  }
+};
+
+const deleteImage = async (req, res) => {
+  const { boardId, imageId } = req.body;
+
+  if (!boardId || !imageId) {
+    return res.status(400).json({ error: 'Board ID and Image ID are required.' });
+  }
+
+  try {
+    const updatedBoard = await Board.findOneAndUpdate(
+      { _id: boardId, owner: req.session.account._id },
+      {
+        $pull: {
+          images: { _id: imageId },
+        },
+      },
+      { new: true },
+    );
+
+    if (!updatedBoard) {
+      return res.status(404).json({ error: 'Board not found or unauthorized.' });
+    }
+
+    return res.json({ message: 'Image deleted sucessfully!', board: updatedBoard });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Error deleting image!' });
+  }
+};
+
 module.exports = {
   makerPage,
   createBoard,
   getBoards,
-  aboutPage,
+  boardDetailPage,
+  getBoardData,
+  uploadImage,
+  deleteImage,
 };

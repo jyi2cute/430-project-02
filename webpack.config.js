@@ -3,6 +3,9 @@ module.exports = {
     entry: {
         app: './client/maker.jsx',
         login: './client/login.jsx',
+        boardDetail: './client/boardDetail.jsx',
+        settings: './client/accountSettings.jsx',
+        premium: './client/premium.jsx',
     }, 
     module: {
         rules: [

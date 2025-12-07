@@ -1,5 +1,5 @@
 const React = require('react');
-const { PasswordChangeWindow } = require(' ./passwordChange.jsx');
+const { PasswordChangeWindow } = require('./passwordChange.jsx');
 const { createRoot } = require('react-dom/client');
 
 //form function for the user profile

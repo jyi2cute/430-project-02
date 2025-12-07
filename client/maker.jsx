@@ -73,7 +73,7 @@ const BoardList = (props) => {
 
                 <p className="boardDescription">Description: {board.description}</p>
                 <p className="boardCategory">Category: {board.category}</p>
-                <a href={`/board/$board._id}`} className="viewBoardLink">View Board ({board.imageCount || 0} Images)</a>
+                <a href={`/board/${board._id}`} className="viewBoardLink">View Board ({board.imageCount || 0} Images)</a>
             </div>
         );
     });

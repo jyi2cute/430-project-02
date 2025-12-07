@@ -6,19 +6,20 @@
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
-  <nav><a href="/login"><img id="logo" src="/assets/img/" alt="mood board logo"/></a>
+  {{!-- <nav><a href="/login"><img id="logo" src="/assets/img/" alt="mood board logo"/></a> --}}
     <div class="navlink"><a href="/logout">Log out</a></div>
   </nav>
 
-  <section id="boardDetail">
-
+  <section id="content">
+    <div id="boardData" data-board-id="{{boardId}}"></div>
+    <div id="app"></div>
   </section>
 
   <div id="boardMessage" class='hidden'>
     <img id="text" src="/assets/img/" alt="text alert"/>
     <h3><span id="errorMessage"></span></h3>
-    <img id="mood board" src="assets/img/" alt="mood board"/>
+    {{!-- <img id="mood board" src="assets/img/" alt="mood board"/> --}}
   </div>
-  <script src="/assets/appBundle.js"></script>
+  <script src="/assets/boardDetailBundle.js"></script>
 </body>
 </html>

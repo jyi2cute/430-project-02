@@ -58,9 +58,70 @@ const signup = async (req, res) => {
   }
 };
 
+const settingsPage = (req, res) => res.render('settings');
+
+const changePassword = async (req, res) => {
+  const { oldPass, newPass, newPass2 } = req.body;
+
+  if (!oldPass || !newPass || !newPass2) {
+    return res.status(400).json({ error: 'All fields are required!' });
+  }
+
+  if (newPass !== newPass2) {
+    return res.status(400).json({ error: 'New passwords do not match!' });
+  }
+
+  try {
+    const account = await Account.findByUsername(req.session.account.username);
+
+    const isAuthenticated = await Account.validatePassword(oldPass, account.password);
+    if (!isAuthenticated) {
+      return res.status(401).json({ error: 'Incorrect current password.' });
+    }
+
+    const newHash = await Account.generateHash(newPass);
+    account.password = newHash;
+    await account.save();
+
+    return res.json({ message: 'Password sucessfully chnaged!' });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'An error occurred while changing the password.' });
+  }
+};
+
+const premiumPage = (req, res) => res.render('premium');
+
+const premiumUpgrade = async (req, res) => {
+  try {
+    const account = await Account.findByUsername(req.session.account.username);
+
+    if (account.isPremium) {
+      return res.status(200).json({ message: 'You are already MoodBoard PRO!' });
+    }
+
+    account.isPremium = true;
+    await account.save();
+
+    req.session.account = Account.toAPI(account);
+
+    return res.json({ message: 'Upgrade successful! Welcome to MoodBoard PRO.' });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'An error occurred during stimulation.' });
+  }
+};
+
+const notFound = (req, res) => res.status(404).render('404');
+
 module.exports = {
   loginPage,
   login,
   logout,
   signup,
+  changePassword,
+  settingsPage,
+  premiumPage,
+  premiumUpgrade,
+  notFound,
 };
