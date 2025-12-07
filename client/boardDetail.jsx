@@ -16,16 +16,56 @@ const ImageCard = ({ image, onDelete }) => {
 
 //drag and drop upload function
 const DragAndDropUpload = ({ boardId, onUploadComplete}) => {
-    const handleFileUpload = (e) => {
+    const handleFileUpload = async (e) => {
         e.preventDefault();
-        console.log("Uploading file for board.", boardId);
-        onUploadComplete();
+        const fileInput = e.currentTarget.querySelector('input[type="file"]');
+
+        if (!fileInput) {
+            console.error("File input element not found in form.");
+            return;
+        }
+
+        const file = fileInput.files[0];
+
+        if (!file) {
+            helper.handleError('Please select an image file to upload.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('boardId', boardId);
+        formData.append('uploadFile', file);
+
+        let response;
+
+        try { 
+            response = await fetch('/uploadImage', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (response.ok) {
+            fileInput.value = '';
+            console.log("SUCCESS: Image data sent. Uploading file for board.", boardId);
+            onUploadComplete();
+        } else {
+            const errorData = await response.json();
+            helper.handleError(errorData.error || `Server Error: Status ${response.status}`);
+        }
+    } catch (error) {
+        console.error('Network or Parse Error:', error);
+        helper.handleError('A network error occurred during upload.');
+    }
     };
 
     return (
-        <form className="uploadBox" onSubmit={handleFileUpload}>
+        <form 
+            className="uploadBox" 
+            onSubmit={handleFileUpload}
+            encType="multipart/form-data"
+            >
             <p>Drag images here or click to upload images</p>
-            <input type="file" multiple onChange={handleFileUpload} />
+            <input type="file" name="uploadFile" />
             <button type="submit">Upload Images</button>
         </form>
     );

@@ -72,11 +72,18 @@ const getBoardData = async (req, res) => {
 };
 
 const uploadImage = async (req, res) => {
-  const { boardId, imageUrl, caption } = req.body;
+  const { boardId } = req.body;
 
-  if (!boardId || !imageUrl || !caption) {
-    return res.status(400).json({ error: 'Board ID, image URL, and caption are required.' });
+  const uploadedFile = req.file;
+
+  const caption = req.body.caption || uploadedFile.originalname;
+
+  if (!boardId || !uploadedFile) {
+    return res.status(400).json({ error: 'Board ID and image file are required.' });
   }
+
+  const imageUrl = `/uploads/${uploadedFile.filename}`;
+  console.log(`Saving image to MongoDB: ${imageUrl}`);
 
   try {
     const updatedBoard = await Board.findOneAndUpdate(

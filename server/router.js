@@ -1,7 +1,7 @@
 const controllers = require('./controllers');
 const mid = require('./middleware');
 
-const router = (app) => {
+const router = (app, upload) => {
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
 
@@ -23,7 +23,7 @@ const router = (app) => {
   app.get('/board/:_id', mid.requiresLogin, controllers.Board.boardDetailPage);
   app.get('/getBoardData', mid.requiresLogin, controllers.Board.getBoardData);
 
-  app.post('/uploadImage', mid.requiresLogin, controllers.Board.uploadImage);
+  app.post('/uploadImage', mid.requiresLogin, upload.single('uploadFile'), controllers.Board.uploadImage);
   app.post('/deleteImage', mid.requiresLogin, controllers.Board.deleteImage);
 
   app.get('/premium', mid.requiresLogin, controllers.Account.premiumPage);

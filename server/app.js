@@ -3,6 +3,9 @@ const path = require('path');
 const express = require('express');
 const compression = require('compression');
 // const favicon = require('serve-favicon');
+const multer = require('multer');
+const uploadDest = path.join(__dirname, '..', 'uploads');
+const upload = multer({ dest: uploadDest });
 const mongoose = require('mongoose');
 const expressHandlebars = require('express-handlebars');
 const helmet = require('helmet');
@@ -33,6 +36,7 @@ redisClient.connect().then(() => {
 
   app.use(helmet());
   app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted`)));
+  app.use('/uploads', express.static(path.join(__dirname, '..','uploads')));
   app.use(compression());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
@@ -51,10 +55,14 @@ redisClient.connect().then(() => {
   app.set('view engine', 'handlebars');
   app.set('views', `${__dirname}/../views`);
 
-  router(app);
+  router(app, upload);
 
   app.listen(port, (err) => {
     if (err) { throw err; }
     console.log(`Listening on port ${port}`);
   });
 });
+
+module.exports = {
+  upload,
+};

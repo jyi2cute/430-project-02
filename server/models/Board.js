@@ -15,7 +15,7 @@ const ImageSchema = new mongoose.Schema({
     trim: true,
     default: 'Untitled Image',
   },
-  uploadedData: {
+  uploadedDate: {
     type: Date,
     default: Date.now,
   },
@@ -66,4 +66,7 @@ BoardSchema.statics.toAPI = (doc) => ({
 });
 
 const BoardModel = mongoose.model('Board', BoardSchema);
-module.exports = BoardModel;
+module.exports = {
+  BoardModel,
+  mongoose,
+};
