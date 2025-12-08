@@ -58,7 +58,22 @@ const signup = async (req, res) => {
   }
 };
 
-const settingsPage = (req, res) => res.render('settings');
+const settingsPage = (req, res) => {
+  const createdDateString = req.session.account.createdDate;
+  let formattedDate = 'N/A';
+  if (createdDateString) {
+    formattedDate = new Date(createdDateString).toDateString();
+  }
+
+  const intialData = {
+    username: req.session.account.username,
+    memberSince: formattedDate,
+  };
+
+  return res.render('settings', {
+    intialData,
+  });
+};
 
 const changePassword = async (req, res) => {
   const { oldPass, newPass, newPass2 } = req.body;
@@ -73,7 +88,8 @@ const changePassword = async (req, res) => {
 
   try {
     const account = await Account.findByUsername(req.session.account.username);
-
+    console.log(`User Input Password: ${oldPass}`);
+    console.log(`Stored Hash: ${account.password}`);
     const isAuthenticated = await Account.validatePassword(oldPass, account.password);
     if (!isAuthenticated) {
       return res.status(401).json({ error: 'Incorrect current password.' });
@@ -83,7 +99,7 @@ const changePassword = async (req, res) => {
     account.password = newHash;
     await account.save();
 
-    return res.json({ message: 'Password sucessfully chnaged!' });
+    return res.json({ message: 'Password sucessfully changed!' });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'An error occurred while changing the password.' });

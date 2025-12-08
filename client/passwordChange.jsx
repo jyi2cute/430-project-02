@@ -20,7 +20,13 @@ const handleChangePass = (e) => {
         return false;
     }
 
-    helper.sendPost(e.target.action, { oldPass, newPass, newPass2 });
+    helper.sendPost(e.target.action, { oldPass, newPass, newPass2 }, (response) => {
+        if (response.message) {
+            helper.handleError(response.message, false);
+
+            e.target.reset();
+        }
+    });
     return false;
 };
 

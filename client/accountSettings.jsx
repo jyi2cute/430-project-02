@@ -19,7 +19,11 @@ const AccountSettings = (props) => {
         <div id="accountSettings">
             <h1>Account Settings</h1>
 
-            <UserProfileForm username={props.intialData.username} memberSince={props.intialData.memberSince} />
+            <UserProfileForm 
+                username={props.intialData.username} 
+                memberSince={props.intialData.memberSince} 
+            />
+            <PasswordChangeWindow/>
         </div>
     );
 };

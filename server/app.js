@@ -52,7 +52,15 @@ redisClient.connect().then(() => {
     saveUninitialized: false,
   }));
 
-  app.engine('handlebars', expressHandlebars.engine({ defaultLayout: '' }));
+  app.engine('handlebars', expressHandlebars.engine({
+    defaultLayout: '',
+    helpers: {
+      JSON(context) {
+        const jsonString = JSON.stringify(context);
+        return jsonString;
+      },
+    },
+  }));
   app.set('view engine', 'handlebars');
   app.set('views', `${__dirname}/../views`);
 

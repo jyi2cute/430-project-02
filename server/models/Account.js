@@ -6,6 +6,7 @@
 */
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
+// const { has } = require('underscore');
 
 /* When generating a password hash, bcrypt (and most other password hash
    functions) use a "salt". The salt is simply extra data that gets hashed
@@ -43,6 +44,7 @@ const AccountSchema = new mongoose.Schema({
 AccountSchema.statics.toAPI = (doc) => ({
   username: doc.username,
   _id: doc._id,
+  createdDate: doc.createdDate,
 });
 
 // Helper function to hash a password
@@ -71,6 +73,17 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
     return callback(err);
   }
 };
+
+AccountSchema.statics.findByUsername = (name) => AccountModel.findOne({ username: name }).select('+password').exec();
+
+AccountSchema.statics.validatePassword = (password, hash) => new Promise((resolve, reject) => {
+  bcrypt.compare(password, hash, (err, result) => {
+    if (err) {
+      return reject(err);
+    }
+    return resolve(result);
+  });
+});
 
 AccountModel = mongoose.model('Account', AccountSchema);
 module.exports = AccountModel;

@@ -1,24 +1,43 @@
 const helper = require('./helper.js');
 const React = require('react');
 const { createRoot } = require('react-dom/client');
+const { useState } = require('react');
 
-const premiumUpgrade = () => {
-    e.preventDefault();
-    helper.hideError();
-
-    helper.sendPost('/premiumUpgrade', { tier }, (response) => {
-        alert(`Sucessfully 'upgraded to the ${tier} tier! You now have unlimited Storage.`);
-
-        window.location.reload();
-    });
-};
 
 const PremiumModel = () => {
+    const [successMessage, setSuccessMessage] = useState('');
+
+
+    const premiumUpgrade = (e, tier) => {
+        e.preventDefault();
+        helper.hideError();
+
+        setSuccessMessage('');
+
+        helper.sendPost('/premiumUpgrade', { tier }, (response) => {
+            const message = response.message || `Sucessfully upgraded to the ${tier} tier! You now have unlimited Storage.`;
+            setSuccessMessage(message);
+
+        });
+    };
+    
     return (
         <div id="premiumModelPage">
             <h1>Unlock Unlimiated Mood Board Potential</h1>
             <p>Our **Premium Tier** alows you to save unlimited images and boards!</p>
 
+            {successMessage && (
+                <p id="upgradeSuccessMessage" style={{
+                    color: 'green',
+                    fontWeight: 'bold',
+                    marginTop: '20px',
+                    padding: '10px',
+                    border: '1px solid green',
+                    backgroundColor: '#e6ffe6'
+                }}>
+                    {successMessage}
+                </p>
+            )}
             <div className="pricingTiers">
                 <div className="tierCard freeTier">
                     <h3>Basic (Current Plan)</h3>
@@ -37,7 +56,7 @@ const PremiumModel = () => {
                         <li>**Unlimited Images**</li>
                         <li>Priority Support</li>
                     </ul>
-                    <button onClick={(e) => premiumUpgrade(e, 'Premium')}>
+                    <button onClick={(e) => premiumUpgrade(e, 'Premium')} type="button">
                         Upgrade Now!
                     </button>
                 </div>

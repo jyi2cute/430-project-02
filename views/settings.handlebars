@@ -10,15 +10,15 @@
     <div class="navlink"><a href="/logout">Log out</a></div>
   </nav>
 
-  <section id="settings">
-
-  </section>
+  <div id="app" data-intial-data='{{{JSON intialData}}}'>
+    <h1>Loading Account Settings...</h1>
+  </div>
 
   <div id="boardMessage" class='hidden'>
     <img id="text" src="/assets/img/" alt="text alert"/>
     <h3><span id="errorMessage"></span></h3>
     <img id="mood board" src="assets/img/" alt="mood board"/>
   </div>
-  {{!-- <script src="/assets/settings.js"></script> --}}
+  <script src="/assets/settingsBundle.js"></script>
 </body>
 </html>

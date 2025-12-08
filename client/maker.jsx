@@ -89,9 +89,23 @@ const App = () => {
     const [reloadBoards, setReloadBoards] = useState(false);
 
     const triggerReload = () => setReloadBoards(prev => !prev);
+    
+    const handleSettings = () => {
+        window.location.href = '/settings';
+    };
 
     return (
         <div>
+            <div id="mainHeader">
+                <h1>MoodBoard Maker</h1>
+                <button
+                    id="settingsButton"
+                    onClick={handleSettings}
+                    title="Account Settings"
+                >
+                    Settings
+                </button>
+            </div>
             <div id="moodBoardApp">
                 <BoardCreationForm triggerReload={triggerReload} />
 
@@ -101,8 +115,6 @@ const App = () => {
                 <h3>Your Collections</h3>
                 <BoardList boards={[]} reloadBoards={reloadBoards} />
             </div>
-            {/* added in about feature page*/}
-            <a href="/about" className="aboutLinkButton">About Mood Board</a>
         </div>
     );
 };
