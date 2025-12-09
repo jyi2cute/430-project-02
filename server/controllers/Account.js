@@ -112,6 +112,10 @@ const premiumUpgrade = async (req, res) => {
   try {
     const account = await Account.findByUsername(req.session.account.username);
 
+    if (!account) {
+      return res.status(404).json({ error: 'Account not found'});
+    }
+    
     if (account.isPremium) {
       return res.status(200).json({ message: 'You are already MoodBoard PRO!' });
     }
