@@ -132,6 +132,28 @@ nav {
   background-color: #e6ffe6;
 }
 
+#errorPage {
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+}
+
+#errorPage img {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
+#errorPage h2 {
+  margin: 0 10px;
+  font-size: 1em;
+}
+
+
 /*form styles (login, signup, and change password)*/
 .mainForm {
   max-width: 400px;
