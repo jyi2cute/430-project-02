@@ -16,10 +16,6 @@ const ImageSchema = new mongoose.Schema({
     trim: true,
     default: 'Untitled Image',
   },
-  uploadedDate: {
-    type: Date,
-    default: Date.now,
-  },
 });
 
 // board model (schema) function
