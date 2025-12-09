@@ -5,6 +5,7 @@ const setTitle = (title) => _.escape(title).trim();
 const setDescription = (description) => _.escape(description).trim();
 const setCategory = (category) => _.escape(category).trim();
 
+// image model (schema) function
 const ImageSchema = new mongoose.Schema({
   url: {
     type: String,
@@ -21,6 +22,7 @@ const ImageSchema = new mongoose.Schema({
   },
 });
 
+// board model (schema) function
 const BoardSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -56,6 +58,7 @@ const BoardSchema = new mongoose.Schema({
   },
 });
 
+// Converts a doc to something we can store in redis later on.
 BoardSchema.statics.toAPI = (doc) => ({
   title: doc.title,
   description: doc.description,

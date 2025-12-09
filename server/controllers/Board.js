@@ -48,12 +48,14 @@ const getBoards = async (req, res) => {
   }
 };
 
+// function for the board detail page
 const boardDetailPage = (req, res) => {
   const boardId = req.params._id;
 
   return res.render('boardDetail', { boardId });
 };
 
+// function for getting the board data
 const getBoardData = async (req, res) => {
   const boardId = req.query._id;
 
@@ -71,6 +73,7 @@ const getBoardData = async (req, res) => {
   }
 };
 
+// function to upload the image
 const uploadImage = async (req, res) => {
   const { boardId } = req.body;
 
@@ -111,6 +114,7 @@ const uploadImage = async (req, res) => {
   }
 };
 
+// function to delete the image
 const deleteImage = async (req, res) => {
   const { boardId, imageId } = req.body;
 

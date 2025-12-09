@@ -58,6 +58,7 @@ const signup = async (req, res) => {
   }
 };
 
+// function for the settings page
 const settingsPage = (req, res) => {
   const createdDateString = req.session.account.createdDate;
   let formattedDate = 'N/A';
@@ -75,6 +76,7 @@ const settingsPage = (req, res) => {
   });
 };
 
+// function to change the password
 const changePassword = async (req, res) => {
   const { oldPass, newPass, newPass2 } = req.body;
 
@@ -88,7 +90,7 @@ const changePassword = async (req, res) => {
 
   try {
     const account = await Account.findByUsername(req.session.account.username);
-  
+
     const isAuthenticated = await Account.validatePassword(oldPass, account.password);
     if (!isAuthenticated) {
       return res.status(401).json({ error: 'Incorrect current password.' });
@@ -105,8 +107,10 @@ const changePassword = async (req, res) => {
   }
 };
 
+// premium page function
 const premiumPage = (req, res) => res.render('premium');
 
+// premium upgrade function
 const premiumUpgrade = async (req, res) => {
   try {
     const account = await Account.findByUsername(req.session.account.username);

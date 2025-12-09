@@ -9,9 +9,7 @@ const mongoose = require('mongoose');
 
 /* When generating a password hash, bcrypt (and most other password hash
    functions) use a "salt". The salt is simply extra data that gets hashed
-   along with the password. The addition of the salt makes it more difficult
-   for people to decrypt the passwords stored in our database. saltRounds
-   essentially defines the number of times we will hash the password and salt.
+   along with the password.
 */
 const saltRounds = 10;
 
@@ -78,8 +76,10 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
   }
 };
 
+// function to find account by username
 AccountSchema.statics.findByUsername = (name) => AccountModel.findOne({ username: name }).select('+password').exec();
 
+// function to validate the account password
 AccountSchema.statics.validatePassword = (password, hash) => new Promise((resolve, reject) => {
   bcrypt.compare(password, hash, (err, result) => {
     if (err) {

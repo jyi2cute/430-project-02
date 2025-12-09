@@ -1,5 +1,6 @@
 const React = require('react');
 
+//function for the ad component
 const AdComponent = () => {
     const handleAdClick = () => {
         window.location.href= '/premium';

@@ -8,8 +8,8 @@ const handleLogin = (e) => {
     e.preventDefault();
     helper.hideError();
 
-    const username = e.target.querySelector('#user').value;
-    const pass = e.target.querySelector('#pass').value;
+    const username = e.target.querySelector('#loginUser').value;
+    const pass = e.target.querySelector('#loginPass').value;
 
     if(!username || !pass) {
         helper.handleError('Username or password is empty!');
@@ -25,9 +25,9 @@ const handleSignup = (e) => {
     e.preventDefault();
     helper.hideError();
 
-    const username = e.target.querySelector('#user').value;
-    const pass = e.target.querySelector('#pass').value;
-    const pass2 = e.target.querySelector('#pass2').value;
+    const username = e.target.querySelector('#signupUser').value;
+    const pass = e.target.querySelector('#signupPass').value;
+    const pass2 = e.target.querySelector('#signupPass2').value;
 
     if(!username || !pass || !pass2) {
         helper.handleError('All fields are required!');
@@ -55,11 +55,11 @@ const LoginWindow = (props) => {
               className="mainForm loginForm"
         >
             <h2>Sign In To MoodBoard</h2>
-            <label htmlFor="username">Username:</label>
-            <input id="user" type="text" name="username" placeholder="your_username" />
+            <label htmlFor="loginUser">Username:</label>
+            <input id="loginUser" type="text" name="username" placeholder="your_username" autocomplete="username"/>
 
-            <label htmlFor="pass">Password:</label>
-            <input id="pass" type="password" name="pass" placeholder="your_password" />
+            <label htmlFor="loginPass">Password:</label>
+            <input id="loginPass" type="password" name="pass" placeholder="your_password" autocomplete="current-password"/>
 
             <input className="formSubmit" type="submit" value="Login" />
         </form>
@@ -77,12 +77,12 @@ const SignupWindow = (props) => {
               className="mainForm signupForm"
         >
             <h2>Create Your Mood Board Account</h2>
-            <label htmlFor="username">Username: </label>
-            <input id="user" type="text" name="username" placeholder="your_username" />
-            <label htmlFor="pass">Password: </label>
-            <input id="pass" type="password" name="pass" placeholder="your_password" />
-            <label htmlFor="pass"> Confirm Password: </label>
-            <input id="pass2" type="password" name="pass2" placeholder="retype password" />
+            <label htmlFor="signupUser">Username: </label>
+            <input id="signupUser" type="text" name="username" placeholder="your_username" autocomplete="username"/>
+            <label htmlFor="signupPass">Password: </label>
+            <input id="signupPass" type="password" name="pass" placeholder="your_password" autocomplete="new-password"/>
+            <label htmlFor="signupPass2"> Confirm Password: </label>
+            <input id="signupPass2" type="password" name="pass2" placeholder="retype password" autocomplete="new-password"/>
             <input className="formSubmit" type="submit" value="Sign up" />
         </form>
     );

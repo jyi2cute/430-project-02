@@ -2,7 +2,8 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const compression = require('compression');
-// const favicon = require('serve-favicon');
+const favicon = require('serve-favicon');
+// added in multer for image file uploads
 const multer = require('multer');
 
 const uploadDest = path.join(__dirname, '..', 'uploads');
@@ -37,6 +38,7 @@ redisClient.connect().then(() => {
 
   app.use(helmet());
   app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted`)));
+  app.use(favicon(`${__dirname}/../hosted/img/moodboard.png`));
   app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
   app.use(compression());
   app.use(express.urlencoded({ extended: true }));

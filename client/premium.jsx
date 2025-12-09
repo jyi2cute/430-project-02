@@ -3,11 +3,11 @@ const React = require('react');
 const { createRoot } = require('react-dom/client');
 const { useState } = require('react');
 
-
+//function for the premium profit-model
 const PremiumModel = () => {
     const [successMessage, setSuccessMessage] = useState('');
 
-
+   //premium upgrade function
     const premiumUpgrade = (e, tier) => {
         e.preventDefault();
         helper.hideError();
@@ -27,14 +27,7 @@ const PremiumModel = () => {
             <p>Our **Premium Tier** alows you to save unlimited images and boards!</p>
 
             {successMessage && (
-                <p id="upgradeSuccessMessage" style={{
-                    color: 'green',
-                    fontWeight: 'bold',
-                    marginTop: '20px',
-                    padding: '10px',
-                    border: '1px solid green',
-                    backgroundColor: '#e6ffe6'
-                }}>
+                <p id="upgradeSuccessMessage" className="upgradeSuccess">
                     {successMessage}
                 </p>
             )}

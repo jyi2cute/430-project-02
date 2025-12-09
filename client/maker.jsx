@@ -33,12 +33,12 @@ const BoardCreationForm = (props) => {
             className="boardCreationForm"
         >
             <h3>Create New MoodBoard</h3>
-            <label htmlFor="title">Title: </label>
-            <input id="boardTitle" type="text" name="name" placeholder="Board Title" />
-            <label htmlFor="description">Description: </label>
-            <input id="boardDescription" type="text" name="description" placeholder="A brief summary of the board's theme" />
-            <label htmlFor="category">Category: </label>
-            <input id="boardCategory" type="text" name="category" placeholder="Nature" />
+            <label htmlFor="boardTitle">Title: </label>
+            <input id="boardTitle" type="text" name="name" placeholder="Board Title" autocomplete="off"/>
+            <label htmlFor="boardDescription">Description: </label>
+            <input id="boardDescription" type="text" name="description" placeholder="A brief summary of the board's theme" autocomplete="off"/>
+            <label htmlFor="boardCategory">Category: </label>
+            <input id="boardCategory" type="text" name="category" placeholder="Nature" autocomplete="off"/>
             <input className="makeBoardSubmit" type="submit" value="Create Mood Board" />
         </form>
     );
@@ -65,6 +65,7 @@ const BoardList = (props) => {
         );
     }
 
+    //function for board nodes
     const boardNodes = boards.map(board => {
         return (
             <div key={board.id} className="boardSummaryCard">
@@ -85,6 +86,7 @@ const BoardList = (props) => {
     );
 };
 
+//app function
 const App = () => {
     const [reloadBoards, setReloadBoards] = useState(false);
 

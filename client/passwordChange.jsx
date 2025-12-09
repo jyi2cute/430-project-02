@@ -2,6 +2,7 @@ const helper = require('./helper.js');
 const React = require('react');
 const { createRoot } = require('react-dom/client');
 
+//function to handle password change
 const handleChangePass = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -30,6 +31,7 @@ const handleChangePass = (e) => {
     return false;
 };
 
+//function for the password change form
 const PasswordChangeWindow = (props) => {
     return (
         <form id='passwordChangeForm'
