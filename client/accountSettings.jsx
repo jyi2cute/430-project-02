@@ -7,7 +7,7 @@ const UserProfileForm = (props) => {
     return (
         <section className="userProfileSettings">
             <h3>General Account Information</h3>
-            <p>Username: **{props.username}**</p>
+            <p>Username: {props.username}</p>
             <p>Member Since: {props.memberSince}</p>
         </section>
     );
