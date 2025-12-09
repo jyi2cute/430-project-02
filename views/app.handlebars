@@ -6,18 +6,26 @@
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
-  <nav><a href="/login"><img id="logo" src="/assets/img/moodboard.png" alt="mood board logo"/></a>
-    <div class="navlink"><a href="/logout">Log out</a></div>
+  <nav>
+    <div class ="nav-left">
+    <a href="/maker" id="logoLink">
+    <img id="logo" src="/assets/img/moodboard.png" alt="mood board logo"/>
+    <span class="logo-text">Moodboard Home</span>
+    </a>
+    </div>
+    <div class="nav-right">
+      <a href="/settings" class="settingsButton">Settings</a>
+      <a href="/logout">Log out</a></div>
+    </div>
   </nav>
 
   <section id="app">
 
   </section>
 
-  <div id="boardMessage" class='hidden'>
-    {{!-- <img id="text" src="/assets/img/" alt="text alert"/> --}}
+  <div id="statusMessage" class='hidden'>
+    <img id="text" src="/assets/img/boardMessage.png" alt="text alert"/>
     <h3><span id="errorMessage"></span></h3>
-    {{!-- <img id="mood board" src="assets/img/" alt="mood board"/> --}}
   </div>
   <script src="/assets/appBundle.js"></script>
 </body>

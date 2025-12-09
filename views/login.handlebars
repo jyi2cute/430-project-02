@@ -6,8 +6,12 @@
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body> 
-  <nav><a href="/login"><img id="logo" src="/assets/img/moodboard.png" alt="mood board logo"/></a>
-    <div class="navlink"><a id="loginButton" href="/login">Login</a></div>
+  <nav>
+    <a href="/login" id="logoLink">
+    <img id="logo" src="/assets/img/moodboard.png" alt="mood board logo"/>
+    <span class="logo-text">Moodboard Maker</span>
+    </a>
+    <div class="navlink"><a id="loginButton" href="/login"></a></div>
     <div class="navlink"><a id="signupButton" href="/signup">Sign up</a></div>
   </nav>
   
@@ -15,10 +19,9 @@
 
   </section>
 
-  <div id="boardMessage" class='hidden'>
-    {{!-- <img id="text" src="/assets/img/" alt="text alert"/> --}}
+  <div id="statusMessage" class='hidden'>
+    <img id="text" src="/assets/img/boardMessage.png" alt="text alert"/>
     <h3><span id="errorMessage"></span></h3>
-    {{!-- <img id="mood board" src="assets/img/" alt="mood board"/> --}}
   </div>
   <script src="/assets/loginBundle.js"></script>
 </body>

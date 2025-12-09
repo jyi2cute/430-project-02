@@ -62,7 +62,6 @@ BoardSchema.statics.toAPI = (doc) => ({
   category: doc.category,
   _id: doc._id,
   images: doc.images || [],
-  imageCount: doc.images ? doc.images.length : 0,
 });
 
 const BoardModel = mongoose.model('Board', BoardSchema);

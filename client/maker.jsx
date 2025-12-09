@@ -73,7 +73,7 @@ const BoardList = (props) => {
 
                 <p className="boardDescription">Description: {board.description}</p>
                 <p className="boardCategory">Category: {board.category}</p>
-                <a href={`/board/${board._id}`} className="viewBoardLink">View Board ({board.imageCount || 0} Images)</a>
+                <a href={`/board/${board._id}`} className="viewBoardLink">View Board Images</a>
             </div>
         );
     });
@@ -89,22 +89,11 @@ const App = () => {
     const [reloadBoards, setReloadBoards] = useState(false);
 
     const triggerReload = () => setReloadBoards(prev => !prev);
-    
-    const handleSettings = () => {
-        window.location.href = '/settings';
-    };
 
     return (
         <div>
             <div id="mainHeader">
                 <h1>MoodBoard Maker</h1>
-                <button
-                    id="settingsButton"
-                    onClick={handleSettings}
-                    title="Account Settings"
-                >
-                    Settings
-                </button>
             </div>
             <div id="moodBoardApp">
                 <BoardCreationForm triggerReload={triggerReload} />

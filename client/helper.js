@@ -33,12 +33,17 @@ const sendPost = async (url, data, handler) => {
     statusContainer.classList.add('hidden');
   }
 
-  if(result.redirect) {
-    window.location = result.redirect;
+  if (!response.ok) {
+    if(result.error) {
+    handleError(result.error);
+  } else {
+    handleError('Request failed with status ' + response.status);
+  }
+  return;
   }
 
-  if(result.error) {
-    handleError(result.error);
+   if(result.redirect) {
+    window.location = result.redirect;
   }
 
   if(handler) {

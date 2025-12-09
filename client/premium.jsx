@@ -46,14 +46,13 @@ const PremiumModel = () => {
                         <li><span className="limit">50 Images Total</span></li>
                         <li>Standard Export</li>
                     </ul>
-                    <button disabled>Current Plan</button>
                 </div>
 
                 <div className="tierCard premiumTier">
                     <h3>Premium</h3>
                     <ul>
-                        <li>**Unlimited Boards**</li>
-                        <li>**Unlimited Images**</li>
+                        <li>Unlimited Boards</li>
+                        <li>Unlimited Images</li>
                         <li>Priority Support</li>
                     </ul>
                     <button onClick={(e) => premiumUpgrade(e, 'Premium')} type="button">
