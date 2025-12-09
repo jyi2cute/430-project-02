@@ -88,8 +88,7 @@ const changePassword = async (req, res) => {
 
   try {
     const account = await Account.findByUsername(req.session.account.username);
-    console.log(`User Input Password: ${oldPass}`);
-    console.log(`Stored Hash: ${account.password}`);
+  
     const isAuthenticated = await Account.validatePassword(oldPass, account.password);
     if (!isAuthenticated) {
       return res.status(401).json({ error: 'Incorrect current password.' });
