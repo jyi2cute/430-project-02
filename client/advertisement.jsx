@@ -7,8 +7,8 @@ const AdComponent = () => {
 
     return (
         <div id="adContainer" className='profitModelConcept'>
-            <h3> MoodBoard PRO: Go Ad-Free! </h3>
-            <p> Tired of distractions and ads? Updgrade now to remove all ads and get unlimited image storage.</p>
+            <h3> MoodBoard PRO: Get unlimited storage! </h3>
+            <p> Tired of having creative limits? Updgrade now to get unlimited image storage.</p>
 
             <button 
                 className="adUpgradeButton"
