@@ -74,6 +74,7 @@ const DragAndDropUpload = ({ boardId, onUploadComplete}) => {
 //function for board detail view
 const BoardDetailView = ({ boardId }) => {
     const [board, setBoard] = useState(null);
+    const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
 
     //function to load the board data
@@ -85,6 +86,7 @@ const BoardDetailView = ({ boardId }) => {
 
         if (data.board) {
             setBoard(data.board);
+            setImages(data.board.images || []);
         }
         setLoading(false);
     };
